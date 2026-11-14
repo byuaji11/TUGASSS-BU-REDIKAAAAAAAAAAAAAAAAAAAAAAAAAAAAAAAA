@@ -3,167 +3,108 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Proyek Smart RC Car Controller berbasis Arduino Uno yang dikendalikan melalui smartphone dengan konsep IoT dan robotika." />
-    <title>Smart RC Car Controller | Proyek IoT</title>
+    <meta name="description" content="Proyek Smart RC Car Controller berbasis ESP32 dan Bluetooth untuk kendali mobil RC melalui smartphone." />
+    <title>Smart RC Car Controller | ESP32</title>
     <style>
-        :root {
-            --bg-1: #07111f;
-            --bg-2: #0c1b2d;
-            --bg-3: #17283d;
-            --panel: rgba(15, 23, 42, 0.82);
-            --text: #e5eefb;
-            --muted: #a7b9d6;
-            --primary: #67e8f9;
-            --purple: #8b5cf6;
-            --pink: #ec4899;
-            --white: #fff;
-            --line: rgba(148, 163, 184, 0.18);
-            --shadow: 0 18px 45px rgba(2, 12, 27, 0.35);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle at 15% 20%, rgba(103,232,249,.16), transparent 20%),
-                radial-gradient(circle at 80% 10%, rgba(139,92,246,.15), transparent 22%),
-                linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
-            color: var(--text);
-            line-height: 1.7;
-        }
-        a { color: inherit; text-decoration: none; }
-        .container { width: min(1180px, 92%); margin: 0 auto; }
-        .topbar { position: sticky; top: 0; z-index: 5; background: rgba(7,17,31,.88); border-bottom: 1px solid var(--line); }
-        .nav { min-height: 72px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-        .brand { color: var(--white); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-        .brand span { color: var(--primary); }
-        .nav-links { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; color: var(--muted); }
-        .nav-links a:hover { color: var(--white); }
-        .nav-btn, .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 11px 20px; font-weight: 700; }
-        .nav-btn, .btn-secondary { border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.04); color: var(--white); }
-        .hero { padding: 76px 0 58px; background: linear-gradient(135deg, rgba(7,17,31,.8), rgba(15,23,42,.65)); }
-        .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 38px; }
-        .eyebrow { display: inline-block; margin-bottom: 18px; padding: 8px 16px; border: 1px solid rgba(103,232,249,.3); border-radius: 999px; color: #a5f3fc; background: rgba(103,232,249,.08); font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-        h1 { margin-bottom: 18px; color: var(--white); font-size: clamp(2.7rem, 5vw, 5.2rem); line-height: 1.05; letter-spacing: -.05em; }
-        .gradient-text { background: linear-gradient(135deg, var(--primary), #c084fc, #f9a8d4); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .lead { max-width: 640px; margin-bottom: 26px; color: var(--muted); font-size: 1.08rem; }
-        .cta-row, .stats-row { display: flex; flex-wrap: wrap; gap: 14px; }
-        .cta-row { margin-bottom: 26px; }
-        .btn-primary { color: #07111f; background: linear-gradient(135deg, var(--primary), #c084fc, var(--pink)); }
-        .stat-box, .hero-panel, .section { border: 1px solid var(--line); background: var(--panel); box-shadow: var(--shadow); }
-        .stat-box { min-width: 120px; padding: 15px 18px; border-radius: 18px; }
-        .stat-box strong, .stat-box span { display: block; }
-        .stat-box strong { color: var(--white); font-size: 1.4rem; }
-        .stat-box span { color: var(--muted); font-size: .82rem; }
-        .hero-panel { padding: 24px; border-radius: 28px; }
-        .mini-card { margin-bottom: 12px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(135deg, rgba(103,232,249,.12), rgba(139,92,246,.12)); }
-        .mini-card strong { display: block; margin-bottom: 5px; }
-        .mini-card p { color: var(--muted); font-size: .94rem; }
-        .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
-        .mini-stat { padding: 14px 8px; border: 1px solid var(--line); border-radius: 16px; text-align: center; }
-        .mini-stat strong, .mini-stat span { display: block; }
-        .mini-stat span { color: var(--muted); font-size: .75rem; }
-        main { padding: 36px 0 72px; }
-        .section { margin-bottom: 26px; padding: 32px 28px; border-radius: 26px; }
-        .section-head { margin-bottom: 22px; }
-        .section h2 { margin-bottom: 8px; color: var(--white); font-size: clamp(1.7rem, 3vw, 2.3rem); }
-        .section-head p, .featured-text { max-width: 760px; color: var(--muted); }
-        .feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-        .feature-card, .process-card { padding: 21px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.035); }
-        .feature-icon { margin-bottom: 10px; font-size: 1.5rem; }
-        .feature-card h3, .process-card h3 { margin-bottom: 7px; color: var(--white); }
-        .feature-card p, .process-card p { color: var(--muted); font-size: .95rem; }
-        .process-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-        .step-num { display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center; margin-bottom: 12px; border-radius: 50%; color: #07111f; background: linear-gradient(135deg, var(--primary), var(--purple)); font-weight: 800; }
-        table { width: 100%; margin-top: 14px; border-collapse: collapse; }
-        th, td { padding: 13px 15px; border-bottom: 1px solid var(--line); text-align: left; }
-        th { color: var(--white); background: rgba(103,232,249,.07); }
-        td { color: var(--muted); }
-        .download-box { padding: 24px; border: 1px dashed rgba(103,232,249,.35); border-radius: 20px; text-align: center; background: rgba(103,232,249,.04); }
-        .download-box p { margin-bottom: 18px; color: var(--muted); }
-        footer { padding: 24px 0 38px; border-top: 1px solid var(--line); color: var(--muted); text-align: center; }
-        @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } .feature-grid, .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (max-width: 600px) { .nav { padding: 12px 0; flex-direction: column; } .nav-links { justify-content: center; gap: 12px; font-size: .9rem; } .hero { padding-top: 50px; } .section { padding: 24px 18px; } .feature-grid, .process-grid { grid-template-columns: 1fr; } }
+        :root { --bg-1:#07111f; --bg-2:#0c1b2d; --bg-3:#17283d; --panel:rgba(15,23,42,.82); --text:#e5eefb; --muted:#a7b9d6; --primary:#67e8f9; --purple:#8b5cf6; --pink:#ec4899; --white:#fff; --line:rgba(148,163,184,.18); --shadow:0 18px 45px rgba(2,12,27,.35); }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; background:radial-gradient(circle at 15% 20%,rgba(103,232,249,.16),transparent 20%),radial-gradient(circle at 80% 10%,rgba(139,92,246,.15),transparent 22%),linear-gradient(135deg,var(--bg-1),var(--bg-2) 45%,var(--bg-3)); color:var(--text); line-height:1.7; }
+        a { color:inherit; text-decoration:none; }
+        .container { width:min(1180px,92%); margin:0 auto; }
+        .topbar { position:sticky; top:0; z-index:5; background:rgba(7,17,31,.88); border-bottom:1px solid var(--line); }
+        .nav { min-height:72px; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+        .brand { color:var(--white); font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+        .brand span { color:var(--primary); }
+        .nav-links { display:flex; align-items:center; gap:22px; flex-wrap:wrap; color:var(--muted); }
+        .nav-links a:hover { color:var(--white); }
+        .nav-btn,.btn { display:inline-flex; align-items:center; justify-content:center; border-radius:999px; padding:11px 20px; font-weight:700; }
+        .nav-btn,.btn-secondary { border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04); color:var(--white); }
+        .hero { padding:76px 0 58px; background:linear-gradient(135deg,rgba(7,17,31,.8),rgba(15,23,42,.65)); }
+        .hero-grid { display:grid; grid-template-columns:1.2fr .8fr; align-items:center; gap:38px; }
+        .eyebrow { display:inline-block; margin-bottom:18px; padding:8px 16px; border:1px solid rgba(103,232,249,.3); border-radius:999px; color:#a5f3fc; background:rgba(103,232,249,.08); font-size:.82rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+        h1 { margin-bottom:18px; color:var(--white); font-size:clamp(2.7rem,5vw,5.2rem); line-height:1.05; letter-spacing:-.05em; }
+        .gradient-text { background:linear-gradient(135deg,var(--primary),#c084fc,#f9a8d4); -webkit-background-clip:text; background-clip:text; color:transparent; }
+        .lead { max-width:640px; margin-bottom:26px; color:var(--muted); font-size:1.08rem; }
+        .cta-row,.stats-row { display:flex; flex-wrap:wrap; gap:14px; }
+        .cta-row { margin-bottom:26px; }
+        .btn-primary { color:#07111f; background:linear-gradient(135deg,var(--primary),#c084fc,var(--pink)); }
+        .stat-box,.hero-panel,.section { border:1px solid var(--line); background:var(--panel); box-shadow:var(--shadow); }
+        .stat-box { min-width:120px; padding:15px 18px; border-radius:18px; }
+        .stat-box strong,.stat-box span { display:block; }
+        .stat-box strong { color:var(--white); font-size:1.4rem; }
+        .stat-box span { color:var(--muted); font-size:.82rem; }
+        .hero-panel { padding:24px; border-radius:28px; }
+        .mini-card { margin-bottom:12px; padding:18px 20px; border:1px solid var(--line); border-radius:20px; background:linear-gradient(135deg,rgba(103,232,249,.12),rgba(139,92,246,.12)); }
+        .mini-card strong { display:block; margin-bottom:5px; }
+        .mini-card p { color:var(--muted); font-size:.94rem; }
+        .card-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px; }
+        .mini-stat { padding:14px 8px; border:1px solid var(--line); border-radius:16px; text-align:center; }
+        .mini-stat strong,.mini-stat span { display:block; }
+        .mini-stat span { color:var(--muted); font-size:.75rem; }
+        main { padding:36px 0 72px; }
+        .section { margin-bottom:26px; padding:32px 28px; border-radius:26px; }
+        .section-head { margin-bottom:22px; }
+        .section h2 { margin-bottom:8px; color:var(--white); font-size:clamp(1.7rem,3vw,2.3rem); }
+        .section-head p,.featured-text { max-width:760px; color:var(--muted); }
+        .feature-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+        .feature-card,.process-card { padding:21px; border:1px solid var(--line); border-radius:20px; background:rgba(255,255,255,.035); }
+        .feature-icon { margin-bottom:10px; font-size:1.5rem; }
+        .feature-card h3,.process-card h3 { margin-bottom:7px; color:var(--white); }
+        .feature-card p,.process-card p { color:var(--muted); font-size:.95rem; }
+        .process-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+        .step-num { display:inline-flex; width:36px; height:36px; align-items:center; justify-content:center; margin-bottom:12px; border-radius:50%; color:#07111f; background:linear-gradient(135deg,var(--primary),var(--purple)); font-weight:800; }
+        table { width:100%; margin-top:14px; border-collapse:collapse; }
+        th,td { padding:13px 15px; border-bottom:1px solid var(--line); text-align:left; }
+        th { color:var(--white); background:rgba(103,232,249,.07); }
+        td { color:var(--muted); }
+        .download-box { padding:24px; border:1px dashed rgba(103,232,249,.35); border-radius:20px; text-align:center; background:rgba(103,232,249,.04); }
+        .download-box p { margin-bottom:18px; color:var(--muted); }
+        footer { padding:24px 0 38px; border-top:1px solid var(--line); color:var(--muted); text-align:center; }
+        @media(max-width:900px) { .hero-grid { grid-template-columns:1fr; } .feature-grid,.process-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+        @media(max-width:600px) { .nav { padding:12px 0; flex-direction:column; } .nav-links { justify-content:center; gap:12px; font-size:.9rem; } .hero { padding-top:50px; } .section { padding:24px 18px; } .feature-grid,.process-grid { grid-template-columns:1fr; } }
     </style>
 </head>
 <body>
-    <div class="topbar">
-        <div class="container nav">
-            <div class="brand"><span>IoT</span> RC</div>
-            <nav class="nav-links" aria-label="Navigasi utama">
-                <a href="#overview">Overview</a>
-                <a href="#features">Features</a>
-                <a href="#process">Workflow</a>
-                <a href="#components">Components</a>
-                <a href="#download" class="nav-btn">Download</a>
-            </nav>
+    <div class="topbar"><div class="container nav">
+        <div class="brand"><span>IoT</span> RC</div>
+        <nav class="nav-links" aria-label="Navigasi utama"><a href="#overview">Overview</a><a href="#features">Features</a><a href="#process">Workflow</a><a href="#components">Components</a><a href="#download" class="nav-btn">Download</a></nav>
+    </div></div>
+    <header class="hero"><div class="container hero-grid">
+        <div>
+            <div class="eyebrow">IoT &amp; Robotics Project</div>
+            <h1>Smart <span class="gradient-text">RC Car</span> Controller</h1>
+            <p class="lead">Mobil RC berbasis ESP32 yang dikendalikan secara real-time melalui Bluetooth smartphone, dengan respons cepat dan sistem kendali yang stabil.</p>
+            <div class="cta-row"><a href="#overview" class="btn btn-primary">Lihat Proyek</a><a href="source/rc_car_program.ino" download="rc_car_esp32.ino" class="btn btn-secondary">Download Code ESP32</a></div>
+            <div class="stats-row"><div class="stat-box"><strong>ESP32</strong><span>Controller</span></div><div class="stat-box"><strong>Bluetooth</strong><span>Koneksi</span></div><div class="stat-box"><strong>L298N</strong><span>Motor Driver</span></div></div>
         </div>
-    </div>
-    <header class="hero">
-        <div class="container hero-grid">
-            <div>
-                <div class="eyebrow">IoT &amp; Robotics Project</div>
-                <h1>Smart <span class="gradient-text">RC Car</span> Controller</h1>
-                <p class="lead">Mobil Remote Control berbasis Arduino Uno yang dikendalikan secara real-time melalui smartphone, dengan desain modern, respons cepat, dan sistem kendali yang stabil.</p>
-                <div class="cta-row">
-                    <a href="#overview" class="btn btn-primary">Lihat Proyek</a>
-                    <a href="source/rc_car_program.ino" download="rc_car_program.ino" class="btn btn-secondary">Download Code</a>
-                </div>
-                <div class="stats-row">
-                    <div class="stat-box"><strong>+45%</strong><span>Respons</span></div>
-                    <div class="stat-box"><strong>3.2x</strong><span>Fleksibel</span></div>
-                    <div class="stat-box"><strong>96%</strong><span>Stabil</span></div>
-                </div>
-            </div>
-            <aside class="hero-panel" aria-label="Ringkasan proyek">
-                <div class="mini-card"><strong>🚗 Sistem Kendali Cerdas</strong><p>Kontrol real-time dengan respons cepat dan stabil.</p></div>
-                <div class="mini-card"><strong>📡 Koneksi IoT</strong><p>Konektivitas nirkabel untuk pengendalian jarak jauh.</p></div>
-                <div class="card-grid">
-                    <div class="mini-stat"><strong>4WD</strong><span>Setup</span></div>
-                    <div class="mini-stat"><strong>HC-06</strong><span>Module</span></div>
-                    <div class="mini-stat"><strong>PWM</strong><span>Control</span></div>
-                </div>
-            </aside>
-        </div>
-    </header>
+        <aside class="hero-panel" aria-label="Ringkasan proyek">
+            <div class="mini-card"><strong>🚗 Sistem Kendali Cerdas</strong><p>Kontrol mobil RC melalui perintah Bluetooth dari smartphone.</p></div>
+            <div class="mini-card"><strong>📡 Bluetooth Terintegrasi</strong><p>ESP32 menggunakan Bluetooth bawaan; modul HC-06 tidak diperlukan.</p></div>
+            <div class="card-grid"><div class="mini-stat"><strong>ESP32</strong><span>Board</span></div><div class="mini-stat"><strong>L298N</strong><span>Driver</span></div><div class="mini-stat"><strong>GPIO</strong><span>Control</span></div></div>
+        </aside>
+    </div></header>
     <main class="container">
-        <section id="overview" class="section">
-            <div class="section-head"><h2>🤖 Tentang Proyek</h2></div>
-            <p class="featured-text">Proyek ini bertujuan untuk memodifikasi mobil RC konvensional menjadi perangkat pintar berbasis internet dan komunikasi nirkabel. Dengan otak utama <strong>Arduino Uno</strong>, sistem menerima perintah dari smartphone, memproses data, dan menggerakkan motor sesuai arah yang diinginkan. Proyek ini menunjukkan penerapan IoT dalam robotika dan otomasi sederhana.</p>
-        </section>
-        <section id="features" class="section">
-            <div class="section-head"><h2>⚡ Fitur Utama</h2><p>Keunggulan sistem kendaraan pintar berbasis Arduino.</p></div>
-            <div class="feature-grid">
-                <article class="feature-card"><div class="feature-icon">📱</div><h3>Kendali Smartphone</h3><p>Tombol atau giroskop smartphone memudahkan navigasi maju, mundur, belok, dan pengaturan kecepatan.</p></article>
-                <article class="feature-card"><div class="feature-icon">🌐</div><h3>Koneksi IoT</h3><p>Modul nirkabel dengan latensi rendah menjaga komunikasi antara pengguna dan mobil tetap stabil.</p></article>
-                <article class="feature-card"><div class="feature-icon">🔋</div><h3>Driver Motor L298N</h3><p>Driver motor DC mengatur arah putaran dan kecepatan roda dengan PWM.</p></article>
-            </div>
-        </section>
-        <section id="process" class="section">
-            <div class="section-head"><h2>🔄 Cara Kerja Sistem</h2><p>Alur kerja perangkat keras hingga kendali real-time.</p></div>
-            <div class="process-grid">
-                <article class="process-card"><span class="step-num">1</span><h3>Input Aplikasi</h3><p>Pengguna mengirim perintah gerak melalui aplikasi kendali smartphone.</p></article>
-                <article class="process-card"><span class="step-num">2</span><h3>Komunikasi Nirkabel</h3><p>Data dikirim melalui Bluetooth/IoT ke Arduino Uno.</p></article>
-                <article class="process-card"><span class="step-num">3</span><h3>Pengolahan Kontrol</h3><p>Arduino memproses sinyal dan mengatur motor melalui driver L298N.</p></article>
-                <article class="process-card"><span class="step-num">4</span><h3>Aktuasi Gerak</h3><p>Roda bergerak maju, mundur, berbelok, atau berhenti sesuai perintah.</p></article>
-            </div>
-        </section>
-        <section id="components" class="section">
-            <div class="section-head"><h2>🛠️ Komponen Utama</h2></div>
-            <table>
-                <thead><tr><th>Komponen</th><th>Fungsi Utama</th></tr></thead>
-                <tbody>
-                    <tr><td><strong>Arduino Uno R3</strong></td><td>Pusat pemrosesan data dan logika kendali.</td></tr>
-                    <tr><td><strong>Modul HC-06 Bluetooth</strong></td><td>Komunikasi nirkabel antara smartphone dan Arduino.</td></tr>
-                    <tr><td><strong>Driver Motor L298N</strong></td><td>Mengatur arah putaran dan kecepatan motor DC.</td></tr>
-                    <tr><td><strong>Chassis &amp; Roda Smart Car</strong></td><td>Kerangka dan penggerak mobil RC.</td></tr>
-                </tbody>
-            </table>
-        </section>
-        <section id="download" class="section">
-            <div class="section-head"><h2>💻 Kode Program Arduino</h2></div>
-            <div class="download-box"><p>Unduh source code sketch Arduino (.ino) untuk proyek ini.</p><a href="source/rc_car_program.ino" download="rc_car_program.ino" class="btn btn-primary">📥 Download Code Arduino (.ino)</a></div>
-        </section>
+        <section id="overview" class="section"><div class="section-head"><h2>🤖 Tentang Proyek</h2></div><p class="featured-text">Proyek ini memodifikasi mobil RC menjadi perangkat pintar berbasis ESP32. ESP32 menerima perintah dari smartphone melalui Bluetooth, memproses data, lalu mengatur arah motor melalui driver L298N. Bluetooth sudah tersedia pada board ESP32 yang mendukung Bluetooth Classic, sehingga modul HC-06 tidak diperlukan.</p></section>
+        <section id="features" class="section"><div class="section-head"><h2>⚡ Fitur Utama</h2><p>Keunggulan sistem kendaraan pintar berbasis ESP32.</p></div><div class="feature-grid">
+            <article class="feature-card"><div class="feature-icon">📱</div><h3>Kendali Smartphone</h3><p>Kirim perintah maju, mundur, belok, dan berhenti dari aplikasi Bluetooth.</p></article>
+            <article class="feature-card"><div class="feature-icon">🌐</div><h3>Bluetooth Terintegrasi</h3><p>ESP32 dapat berkomunikasi langsung dengan smartphone tanpa modul HC-06 tambahan.</p></article>
+            <article class="feature-card"><div class="feature-icon">🔋</div><h3>Driver Motor L298N</h3><p>Driver motor DC mengatur arah putaran motor berdasarkan sinyal dari GPIO ESP32.</p></article>
+        </div></section>
+        <section id="process" class="section"><div class="section-head"><h2>🔄 Cara Kerja Sistem</h2><p>Alur kerja perangkat keras hingga kendali real-time.</p></div><div class="process-grid">
+            <article class="process-card"><span class="step-num">1</span><h3>Input Aplikasi</h3><p>Pengguna mengirim perintah melalui aplikasi Bluetooth smartphone.</p></article>
+            <article class="process-card"><span class="step-num">2</span><h3>Komunikasi Bluetooth</h3><p>Bluetooth bawaan ESP32 menerima perintah F, B, L, R, atau S.</p></article>
+            <article class="process-card"><span class="step-num">3</span><h3>Pengolahan Kontrol</h3><p>ESP32 memproses perintah dan mengatur pin input driver L298N.</p></article>
+            <article class="process-card"><span class="step-num">4</span><h3>Aktuasi Gerak</h3><p>Motor bergerak maju, mundur, berbelok, atau berhenti sesuai perintah.</p></article>
+        </div></section>
+        <section id="components" class="section"><div class="section-head"><h2>🛠️ Komponen Utama</h2></div><table><thead><tr><th>Komponen</th><th>Fungsi Utama</th></tr></thead><tbody>
+            <tr><td><strong>ESP32 DevKit</strong></td><td>Pusat pemrosesan data dan Bluetooth terintegrasi.</td></tr>
+            <tr><td><strong>Driver Motor L298N</strong></td><td>Mengatur arah putaran motor DC kiri dan kanan.</td></tr>
+            <tr><td><strong>Baterai Motor</strong></td><td>Sumber daya untuk motor melalui driver L298N.</td></tr>
+            <tr><td><strong>Chassis &amp; Roda Smart Car</strong></td><td>Kerangka dan penggerak mobil RC.</td></tr>
+        </tbody></table><p class="featured-text" style="margin-top:14px">Catatan: gunakan board ESP32 yang mendukung Bluetooth Classic SPP (misalnya ESP32-WROOM-32). Hubungkan GND ESP32 dan GND L298N; jangan memberi daya motor langsung dari pin ESP32.</p></section>
+        <section id="download" class="section"><div class="section-head"><h2>💻 Kode Program ESP32</h2></div><div class="download-box"><p>Unduh sketch ESP32 (.ino). Pasangkan ponsel dengan perangkat Bluetooth bernama <strong>RC_Car_ESP32</strong>.</p><a href="source/rc_car_program.ino" download="rc_car_esp32.ino" class="btn btn-primary">📥 Download Code ESP32 (.ino)</a></div></section>
     </main>
-    <footer>© 2026 IoT RC Car Project | Dibuat dengan HTML &amp; CSS Murni</footer>
+    <footer>© 2026 IoT RC Car Project | ESP32 &amp; Bluetooth</footer>
 </body>
 </html>
