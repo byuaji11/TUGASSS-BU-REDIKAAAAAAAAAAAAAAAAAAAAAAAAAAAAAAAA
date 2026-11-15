@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Proyek Smart RC Car berbasis ESP32 dan Wi-Fi." />
-  <title>Smart RC Car | ESP32 Wi-Fi</title>
-  <style>
-    :root{--bg:#07111f;--panel:#0f172a;--text:#e5eefb;--muted:#a7b9d6;--cyan:#67e8f9;--purple:#8b5cf6;--line:rgba(148,163,184,.2)}
-    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#07111f,#17283d);color:var(--text);line-height:1.7}.container{width:min(100% - 32px,1000px);margin:auto}nav{display:flex;flex-wrap:wrap;gap:20px;padding:18px 0}nav a{color:var(--cyan);text-decoration:none}header{text-align:center;padding:56px 0;animation:hero-enter .9s ease-out both}header h1{font-size:clamp(2rem,5vw,3.5rem);margin:8px 0;animation:hero-enter .8s .12s ease-out both}header p,.muted{color:var(--muted)}header .container>p:first-child{animation:hero-enter .7s ease-out both}header h1+.container p,header .container>p:last-child{animation:hero-enter .8s .24s ease-out both}.section{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;margin:22px 0}.section h2{margin-bottom:14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:14px}.card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:18px}.card ul{padding-left:22px}.physical-photo{display:block;width:100%;max-height:680px;object-fit:contain;background:#050b14;border-radius:12px;margin-top:18px}.caption{color:var(--muted);text-align:center;margin-top:10px}.button{display:inline-block;margin:8px 10px 0 0;padding:10px 16px;border-radius:8px;background:linear-gradient(90deg,var(--cyan),#a78bfa);color:#07111f;text-decoration:none;font-weight:bold}footer{text-align:center;color:var(--muted);padding:26px 0}@keyframes hero-enter{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}@media(max-width:600px){.section{padding:20px}header{padding:40px 0}}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Beranda proyek Smart RC Car ESP32. Pilih halaman informasi proyek.">
+  <title>Smart RC Car ESP32 | Beranda</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="container" aria-label="Navigasi"><a href="#proyek">Proyek</a><a href="#fisik">Contoh Fisik</a><a href="#bahan">Bahan</a><a href="#alat">Alat</a><a href="#kode">Kode ESP32</a></nav>
-  <header id="proyek"><div class="container"><p>Proyek IoT &amp; Robotika</p><h1>Smart RC Car Wi-Fi</h1><p>Mobil RC berbasis ESP32 yang dikendalikan melalui jaringan Wi-Fi lokal dan browser smartphone.</p></div></header>
+  <header class="site-header">
+    <a class="brand" href="index.html">Smart RC Car</a>
+    <nav aria-label="Navigasi utama">
+      <a aria-current="page" href="index.html">Beranda</a>
+      <a href="tentang.html">Tentang</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="bahan-alat.html">Bahan &amp; Alat</a>
+      <a href="kode.html">Kode ESP32</a>
+    </nav>
+  </header>
   <main class="container">
-    <section class="section"><h2>🤖 Tentang Proyek</h2><p class="muted">ESP32 membuat access point Wi-Fi lokal untuk menerima perintah kendali dari browser. Hubungkan ponsel ke jaringan RC_Car_Esp32, lalu kendalikan mobil melalui halaman kontrol.</p></section>
-    <section class="section" id="fisik"><h2>📸 Contoh Fisik</h2><p class="muted">Berikut adalah foto rakitan fisik Smart RC Car, dengan rangka akrilik, empat roda, baterai, papan kontrol, kabel, dan sensor di bagian depan.</p><img class="physical-photo" src="20261113_153108.jpg" alt="Mobil robot Smart RC Car rakitan dengan rangka akrilik, empat roda, baterai, papan kontrol, kabel, dan sensor depan"><p class="caption">Rakitan fisik Smart RC Car berbasis ESP32.</p></section>
-    <section class="section" id="bahan"><h2>🧩 Bahan</h2><div class="grid"><article class="card"><ul><li>ESP32</li><li>Driver motor</li><li>Motor DC dan roda (4 buah)</li><li>Rangka akrilik (2 buah)</li><li>Baut dan spacer</li><li>Saklar</li><li>Papan PCB</li></ul></article><article class="card"><ul><li>Sensor line follower</li><li>Slot baterai</li><li>Baterai 18650</li><li>Modul charger baterai</li><li>Kabel dan pin header</li></ul></article></div></section>
-    <section class="section" id="alat"><h2>🛠️ Alat</h2><div class="grid"><article class="card"><ul><li>Obeng</li><li>Solder dan timah solder</li><li>Multimeter</li><li>Gunting</li></ul></article></div><p class="muted" style="margin-top:12px">Daftar bahan ditampilkan tanpa harga.</p></section>
-    <section class="section" id="kode"><h2>💻 Kode Program ESP32 Wi-Fi</h2><p class="muted">Unduh file program ESP32 dan konfigurasi PlatformIO untuk kendali mobil melalui hotspot Wi-Fi.</p><a class="button" href="main.cpp">Unduh kode ESP32</a><a class="button" href="platfromio.ini">Lihat konfigurasi PlatformIO</a></section>
+    <section class="hero">
+      <p class="eyebrow">Proyek IoT &amp; Robotika</p>
+      <h1>Smart RC Car Wi-Fi</h1>
+      <p>Informasi proyek kini dipisah ke halaman-halaman khusus agar lebih mudah dibaca dan dicari.</p>
+      <a class="button" href="tentang.html">Mulai dari Tentang Proyek</a>
+    </section>
+    <section class="section">
+      <h2>Pilih bagian</h2>
+      <div class="grid">
+        <a class="card card-link" href="tentang.html"><h3>Tentang Proyek</h3><p>Tujuan dan cara kerja mobil RC berbasis ESP32.</p></a>
+        <a class="card card-link" href="galeri.html"><h3>Galeri</h3><p>Lihat dokumentasi fisik proyek.</p></a>
+        <a class="card card-link" href="bahan-alat.html"><h3>Bahan &amp; Alat</h3><p>Daftar komponen dan alat perakitan.</p></a>
+        <a class="card card-link" href="kode.html"><h3>Kode ESP32</h3><p>Unduh sketch dan lihat petunjuk pemakaian.</p></a>
+      </div>
+    </section>
   </main>
   <footer>© 2026 Smart RC Car | ESP32 &amp; Wi-Fi</footer>
 </body>
