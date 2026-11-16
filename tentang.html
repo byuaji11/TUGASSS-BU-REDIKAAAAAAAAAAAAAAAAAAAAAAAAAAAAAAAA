@@ -20,6 +20,12 @@
       <h1>Tentang Proyek</h1>
       <p>Smart RC Car ini menggunakan ESP32 untuk membuat access point Wi-Fi lokal. Ponsel dapat terhubung ke jaringan mobil dan mengirimkan perintah kendali melalui browser.</p>
       <p>Untuk mengoperasikan mobil, hubungkan ponsel ke jaringan <strong>RC_Car_ESP32</strong>, lalu buka alamat <strong>http://192.168.4.1</strong>. Nama jaringan dan kata sandi dapat disesuaikan pada sketch ESP32.</p>
+
+      <h2>Prinsip Kerja Mobil</h2>
+      <p>ESP32 membuat jaringan Wi-Fi lokal yang dapat diakses oleh ponsel. Setelah terhubung, pengguna membuka halaman kendali di browser dan menekan tombol maju, mundur, kiri, kanan, atau berhenti. Setiap tombol mengirimkan perintah melalui Wi-Fi ke server web yang berjalan pada ESP32.</p>
+      <p>ESP32 menerjemahkan perintah tersebut menjadi sinyal pada pin keluaran untuk mengendalikan driver motor. Driver motor kemudian mengatur arah arus ke motor DC kiri dan kanan, sehingga motor dapat berputar maju atau mundur. Kedua motor berputar searah untuk bergerak maju atau mundur; perbedaan arah atau putaran antara sisi kiri dan kanan membuat mobil berbelok.</p>
+      <p>Saat tombol dilepas atau perintah tidak lagi diterima, program menghentikan motor secara otomatis sebagai pengaman. Dengan demikian, alur kerja mobil adalah: <strong>ponsel → Wi-Fi → ESP32 → driver motor → motor dan roda</strong>.</p>
+
       <div class="notice"><strong>Catatan:</strong> Pastikan rangkaian motor, driver motor, dan pin pada sketch sesuai sebelum menyalakan mobil.</div>
       <a class="button" href="galeri.html">Lanjut ke Galeri</a>
     </section>
