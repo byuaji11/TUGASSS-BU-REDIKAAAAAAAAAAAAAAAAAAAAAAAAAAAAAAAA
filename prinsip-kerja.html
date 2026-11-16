@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prinsip kerja Smart RC Car berbasis ESP32 dan Wi-Fi.">
+  <title>Prinsip Kerja | Smart RC Car</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Smart RC Car</a>
+    <nav aria-label="Navigasi utama">
+      <a href="index.html">Beranda</a>
+      <a href="tentang.html">Tentang</a>
+      <a aria-current="page" href="prinsip-kerja.html">Prinsip Kerja</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="bahan-alat.html">Bahan &amp; Alat</a>
+      <a href="kode.html">Kode ESP32</a>
+    </nav>
+  </header>
+  <main class="container">
+    <section class="section">
+      <p class="eyebrow">Cara Kerja</p>
+      <h1>Prinsip Kerja Smart RC Car</h1>
+      <p>Mobil RC ini dikendalikan melalui jaringan Wi-Fi lokal yang dibuat oleh ESP32. Ponsel bertindak sebagai pengendali, sedangkan ESP32 menerima perintah dan mengatur gerakan motor.</p>
+      <div class="grid two-columns">
+        <article class="card">
+          <h2>1. Ponsel mengirim perintah</h2>
+          <p>Hubungkan ponsel ke jaringan <strong>RC_Car_ESP32</strong>, lalu buka <strong>http://192.168.4.1</strong> di browser. Tombol pada halaman kendali mengirim instruksi maju, mundur, kiri, kanan, atau berhenti.</p>
+        </article>
+        <article class="card">
+          <h2>2. ESP32 memproses perintah</h2>
+          <p>ESP32 menerima permintaan dari browser melalui Wi-Fi dan menerjemahkannya menjadi sinyal kendali untuk motor. ESP32 juga memantau perintah terakhir agar motor berhenti jika tombol dilepas atau koneksi terputus.</p>
+        </article>
+        <article class="card">
+          <h2>3. Driver mengatur motor</h2>
+          <p>Sinyal dari ESP32 diteruskan ke driver motor. Driver mengatur arah arus ke motor DC kiri dan kanan, sehingga motor dapat berputar maju atau mundur.</p>
+        </article>
+        <article class="card">
+          <h2>4. Roda menggerakkan mobil</h2>
+          <p>Kedua sisi motor bergerak searah untuk membawa mobil maju atau mundur. Perbedaan gerak antara sisi kiri dan kanan membuat mobil berbelok. Perintah berhenti menghentikan putaran motor.</p>
+        </article>
+      </div>
+      <div class="notice"><strong>Alur kerja:</strong> Ponsel → Wi-Fi → ESP32 → driver motor → motor DC → roda.</div>
+      <a class="button" href="tentang.html">Kembali ke Tentang Proyek</a>
+    </section>
+  </main>
+  <footer>© 2026 Smart RC Car | ESP32 &amp; Wi-Fi</footer>
+</body>
+</html>
