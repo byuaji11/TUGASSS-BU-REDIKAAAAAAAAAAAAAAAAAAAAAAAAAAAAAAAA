@@ -1,0 +1,56 @@
+/* Entrance animations for the homepage. They play once when the page loads. */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes reveal-left {
+  from { opacity: 0; transform: translate3d(-24px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes reveal-image {
+  from { opacity: 0; transform: translate3d(18px, 8px, 0) scale(.96) rotate(3deg); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotate(1.5deg); }
+}
+
+@keyframes soft-glow {
+  0%, 100% { opacity: .55; transform: scale(.94); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+.site-header { animation: reveal-up .65s cubic-bezier(.2,.7,.25,1) both; }
+.hero-copy > * { animation: reveal-left .7s cubic-bezier(.2,.7,.25,1) both; }
+.hero-copy > :nth-child(1) { animation-delay: .08s; }
+.hero-copy > :nth-child(2) { animation-delay: .16s; }
+.hero-copy > :nth-child(3) { animation-delay: .24s; }
+.hero-copy > :nth-child(4) { animation-delay: .32s; }
+.hero-copy > :nth-child(5) { animation-delay: .4s; }
+.hero-visual img { animation: reveal-image .9s cubic-bezier(.2,.7,.25,1) .18s both; }
+.image-glow { animation: soft-glow 4s ease-in-out 1s infinite; }
+.visual-label { animation: reveal-up .55s cubic-bezier(.2,.7,.25,1) .65s both; }
+.visual-index { animation: reveal-up .5s ease .55s both; }
+.intro-strip { animation: reveal-up .65s ease .38s both; }
+.section-heading { animation: reveal-up .65s ease .08s both; }
+.explore-section .card { animation: reveal-up .6s cubic-bezier(.2,.7,.25,1) both; }
+.explore-section .card:nth-child(1) { animation-delay: .12s; }
+.explore-section .card:nth-child(2) { animation-delay: .2s; }
+.explore-section .card:nth-child(3) { animation-delay: .28s; }
+.explore-section .card:nth-child(4) { animation-delay: .36s; }
+.explore-section .card:nth-child(5) { animation-delay: .44s; }
+.cta-panel { animation: reveal-up .7s cubic-bezier(.2,.7,.25,1) .18s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .hero-copy > *,
+  .hero-visual img,
+  .image-glow,
+  .visual-label,
+  .visual-index,
+  .intro-strip,
+  .section-heading,
+  .explore-section .card,
+  .cta-panel {
+    animation: none !important;
+  }
+}
