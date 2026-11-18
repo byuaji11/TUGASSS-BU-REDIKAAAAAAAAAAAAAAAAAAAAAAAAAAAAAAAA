@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Beranda proyek Smart RC Car ESP32. Pilih halaman informasi proyek.">
-  <title>Smart RC Car ESP32 | Beranda</title>
+  <meta name="description" content="Kenali Smart RC Car berbasis ESP32 dan Wi-Fi: cara kerja, komponen, galeri, dan kode program.">
+  <meta name="theme-color" content="#101611">
+  <title>Smart RC Car | Proyek IoT &amp; Robotika</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="index.html">Smart RC Car</a>
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">S</span><span>Smart RC<span class="brand-light">.Car</span></span></a>
     <nav aria-label="Navigasi utama">
       <a aria-current="page" href="index.html">Beranda</a>
       <a href="tentang.html">Tentang</a>
@@ -19,24 +20,54 @@
       <a href="kode.html">Kode ESP32</a>
     </nav>
   </header>
-  <main class="container">
+
+  <main class="container home-main">
     <section class="hero">
-      <p class="eyebrow">Proyek IoT &amp; Robotika</p>
-      <h1>Smart RC Car Wi-Fi</h1>
-      <p>Informasi proyek kini dipisah ke halaman-halaman khusus agar lebih mudah dibaca dan dicari.</p>
-      <a class="button" href="tentang.html">Mulai dari Tentang Proyek</a>
-    </section>
-    <section class="section">
-      <h2>Pilih bagian</h2>
-      <div class="grid">
-        <a class="card card-link" href="tentang.html"><h3>Tentang Proyek</h3><p>Tujuan dan pengenalan mobil RC berbasis ESP32.</p></a>
-        <a class="card card-link" href="prinsip-kerja.html"><h3>Prinsip Kerja</h3><p>Pelajari alur perintah dari ponsel hingga motor menggerakkan mobil.</p></a>
-        <a class="card card-link" href="galeri.html"><h3>Galeri</h3><p>Lihat dokumentasi fisik proyek.</p></a>
-        <a class="card card-link" href="bahan-alat.html"><h3>Bahan &amp; Alat</h3><p>Daftar komponen dan alat perakitan.</p></a>
-        <a class="card card-link" href="kode.html"><h3>Kode ESP32</h3><p>Unduh sketch dan lihat petunjuk pemakaian.</p></a>
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> PROYEK IOT &amp; ROBOTIKA</p>
+        <h1>Teknologi seru,<br><span>dibuat bergerak.</span></h1>
+        <p class="hero-description">Kenalan dengan Smart RC Car berbasis ESP32—mobil pintar yang bisa dikendalikan dari ponsel melalui jaringan Wi-Fi lokal.</p>
+        <div class="hero-actions">
+          <a class="button" href="tentang.html">Jelajahi proyek <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="galeri.html">Lihat galeri <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-note"><span aria-hidden="true">⌁</span> Dirakit untuk belajar. Siap untuk melaju.</div>
+      </div>
+      <div class="hero-visual">
+        <div class="image-glow" aria-hidden="true"></div>
+        <img src="imagemobil-rc.jpg" alt="Mobil Smart RC hasil rakitan proyek" fetchpriority="high">
+        <div class="visual-label"><span class="status-dot" aria-hidden="true"></span><span><strong>ESP32</strong><small>Wi-Fi control</small></span></div>
+        <span class="visual-index" aria-hidden="true">01 / RC</span>
       </div>
     </section>
+
+    <section class="intro-strip" aria-label="Ringkasan proyek">
+      <p><span class="strip-number">01</span> Kendali lewat browser</p>
+      <p><span class="strip-number">02</span> Jaringan Wi-Fi lokal</p>
+      <p><span class="strip-number">03</span> Rakit, pelajari, kembangkan</p>
+    </section>
+
+    <section class="section explore-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">JELAJAHI PROYEK</p><h2>Mulai dari sini<span class="accent-dot">.</span></h2></div>
+        <p class="section-lead">Semua yang ingin kamu tahu tentang mobil pintar ini, ada di sini.</p>
+      </div>
+      <div class="grid">
+        <a class="card card-link" href="tentang.html"><span class="card-icon" aria-hidden="true">✳</span><span class="card-number">01 / PENGENALAN</span><h3>Tentang Proyek</h3><p>Tujuan dan cerita di balik Smart RC Car berbasis ESP32.</p><span class="card-arrow" aria-hidden="true">↗</span></a>
+        <a class="card card-link" href="prinsip-kerja.html"><span class="card-icon" aria-hidden="true">⌁</span><span class="card-number">02 / CARA KERJA</span><h3>Prinsip Kerja</h3><p>Ikuti perjalanan perintah dari ponsel hingga motor bergerak.</p><span class="card-arrow" aria-hidden="true">↗</span></a>
+        <a class="card card-link" href="galeri.html"><span class="card-icon" aria-hidden="true">▧</span><span class="card-number">03 / DOKUMENTASI</span><h3>Galeri</h3><p>Lihat lebih dekat dokumentasi proses dan hasil rakitan.</p><span class="card-arrow" aria-hidden="true">↗</span></a>
+        <a class="card card-link" href="bahan-alat.html"><span class="card-icon" aria-hidden="true">⌘</span><span class="card-number">04 / PERAKITAN</span><h3>Bahan &amp; Alat</h3><p>Kenali komponen dan alat yang dibutuhkan untuk merakit.</p><span class="card-arrow" aria-hidden="true">↗</span></a>
+        <a class="card card-link" href="kode.html"><span class="card-icon" aria-hidden="true">&lt;/&gt;</span><span class="card-number">05 / PEMROGRAMAN</span><h3>Kode ESP32</h3><p>Temukan sketch dan petunjuk untuk mulai mencoba.</p><span class="card-arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="cta-panel">
+      <div><p class="eyebrow">SIAP MELIHAT LEBIH DEKAT?</p><h2>Dari ide kecil,<br>jadi mobil yang bergerak.</h2></div>
+      <a class="button button-light" href="prinsip-kerja.html">Pelajari cara kerjanya <span aria-hidden="true">↗</span></a>
+      <span class="cta-decoration" aria-hidden="true">RC</span>
+    </section>
   </main>
-  <footer>© 2026 Smart RC Car | ESP32 &amp; Wi-Fi</footer>
+
+  <footer><span>© 2026 Smart RC Car</span><span>Dibuat dengan rasa ingin tahu <span class="footer-heart" aria-label="cinta">♥</span> ESP32 &amp; Wi-Fi</span></footer>
 </body>
 </html>
